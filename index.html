@@ -143,6 +143,25 @@
             background: #5568d3;
         }
 
+        .download-btn {
+            position: absolute;
+            top: 45px;
+            right: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+            z-index: 10;
+        }
+
+        .download-btn:hover {
+            background: #218838;
+        }
+
         .key-concepts {
             background: #fff3cd;
             padding: 15px;
@@ -254,7 +273,7 @@
                 padding: 15px;
             }
 
-            .copy-btn {
+            .copy-btn, .download-btn {
                 position: static;
                 display: block;
                 width: 100%;
@@ -329,6 +348,7 @@
 
                 <div style="position: relative;">
                     <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    <button class="download-btn" onclick="downloadCode(this, '1.c')">Download Code</button>
                     <pre><code>// Program 1: Rectangular Mesh
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
@@ -421,6 +441,7 @@ int main(int argc,char *argv[])
 
                 <div style="position: relative;">
                     <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    <button class="download-btn" onclick="downloadCode(this, '2.c')">Download Code</button>
                     <pre><code>// Program 2: Midpoint Line Drawing
 #include &lt;stdio.h&gt;
 #include&lt;GL/glut.h&gt;
@@ -538,6 +559,7 @@ int main(int argc,char *argv[])
 
                 <div style="position: relative;">
                     <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    <button class="download-btn" onclick="downloadCode(this, '3.c')">Download Code</button>
                     <pre><code>// Program 3: House Rotation
 #include &lt;stdio.h&gt;
 #include &lt;GL/glut.h&gt;
@@ -649,6 +671,7 @@ int main(int argc, char* argv[])
 
                 <div style="position: relative;">
                     <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    <button class="download-btn" onclick="downloadCode(this, '4.c')">Download Code</button>
                     <pre><code>// Program 4: Scan-Line Polygon Filling
 #include &lt;GL/glut.h&gt;
 #include &lt;stdio.h&gt;
@@ -808,6 +831,7 @@ int main(int argc,char *argv[]) {
 
                 <div style="position: relative;">
                     <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    <button class="download-btn" onclick="downloadCode(this, '5.c')">Download Code</button>
                     <pre><code>// Program 5: Mouse and Keyboard Interaction
 #include &lt;GL/glut.h&gt;
 #include &lt;stdio.h&gt;
@@ -954,6 +978,7 @@ int main(int argc, char *argv[]) {
 
                 <div style="position: relative;">
                     <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    <button class="download-btn" onclick="downloadCode(this, '6.c')">Download Code</button>
                     <pre><code>// Program 6: Midpoint Circle Drawing
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
@@ -1058,6 +1083,7 @@ int main(int argc,char* argv[])
 
                 <div style="position: relative;">
                     <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    <button class="download-btn" onclick="downloadCode(this, '7.c')">Download Code</button>
                     <pre><code>// Program 7: Sierpinski Gasket
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
@@ -1130,7 +1156,7 @@ int main(int argc,char* argv[])
     <script>
         // Copy code to clipboard
         function copyCode(button) {
-            const codeBlock = button.nextElementSibling.querySelector('code');
+            const codeBlock = button.nextElementSibling.nextElementSibling.querySelector('code');
             const code = codeBlock.textContent;
             
             navigator.clipboard.writeText(code).then(() => {
@@ -1145,6 +1171,37 @@ int main(int argc,char* argv[])
             }).catch(err => {
                 alert('Failed to copy code');
             });
+        }
+
+        // Download code as .c file
+        function downloadCode(button, filename) {
+            const codeBlock = button.nextElementSibling.querySelector('code');
+            const code = codeBlock.textContent;
+            
+            // Create a blob with the code content
+            const blob = new Blob([code], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            
+            // Create a temporary link and trigger download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            
+            // Cleanup
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            
+            // Visual feedback
+            const originalText = button.textContent;
+            button.textContent = '✓ Downloaded!';
+            button.style.background = '#218838';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '#28a745';
+            }, 2000);
         }
 
         // Smooth scroll for internal links
