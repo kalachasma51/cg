@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGV Lab Programs - Quick Reference</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .program-card {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .program-title {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .program-number {
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .description {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 3px solid #28a745;
+        }
+
+        .description h3 {
+            color: #28a745;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .description ul {
+            margin-left: 20px;
+            color: #555;
+        }
+
+        .description li {
+            margin: 5px 0;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #5568d3;
+        }
+
+        .key-concepts {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 3px solid #ffc107;
+        }
+
+        .key-concepts h3 {
+            color: #856404;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .key-concepts p {
+            color: #856404;
+            font-size: 0.95rem;
+        }
+
+        .output-demo {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 3px solid #2196f3;
+            text-align: center;
+        }
+
+        .output-demo h3 {
+            color: #1565c0;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .output-visual {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 10px 0;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .output-visual svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .output-desc {
+            color: #424242;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        .demo-badge {
+            display: inline-block;
+            background: #2196f3;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        footer {
+            background: #2d2d2d;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .program-card {
+                padding: 15px;
+            }
+
+            .program-title {
+                font-size: 1.2rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            pre {
+                font-size: 0.75rem;
+                padding: 15px;
+            }
+
+            .copy-btn {
+                position: static;
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.2rem;
+            }
+
+            .program-title {
+                font-size: 1rem;
+            }
+
+            pre {
+                font-size: 0.7rem;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Computer Graphics Lab Programs</h1>
+            <p>Quick Reference Guide with Easy Comments for Study</p>
+        </header>
+
+        <div class="content">
+            <!-- Program 1: Rectangular Mesh -->
+            <div class="program-card">
+                <div class="program-title">
+                    <span class="program-number">1</span>
+                    <span>Rectangular Mesh Display</span>
+                </div>
+                
+                <div class="description">
+                    <h3>📋 What it does:</h3>
+                    <ul>
+                        <li>Creates a grid of rectangles on screen</li>
+                        <li>Uses nested loops to draw mesh pattern</li>
+                    </ul>
+                </div>
+
+                <div class="key-concepts">
+                    <h3>💡 Key Concepts:</h3>
+                    <p>2D Arrays, Nested Loops, GL_LINE_LOOP for drawing rectangles</p>
+                </div>
+
+                <div class="output-demo">
+                    <span class="demo-badge">📺 Output Preview</span>
+                    <h3>What you'll see:</h3>
+                    <div class="output-visual">
+                        <svg width="300" height="200" viewBox="0 0 300 200">
+                            <!-- Grid pattern -->
+                            <defs>
+                                <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                    <rect width="20" height="20" fill="none" stroke="#0066cc" stroke-width="1"/>
+                                </pattern>
+                            </defs>
+                            <rect width="280" height="180" x="10" y="10" fill="url(#grid)"/>
+                        </svg>
+                    </div>
+                    <p class="output-desc">
+                        <strong>Expected Output:</strong> A white window (500x500) with a blue grid mesh pattern. 
+                        You'll see 20×30 rectangles arranged in rows and columns, creating a mesh-like pattern.
+                        Each rectangle is drawn with blue lines (GL_LINE_LOOP).
+                    </p>
+                </div>
+
+                <div style="position: relative;">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    <pre><code>// Program 1: Draw a Rectangular Mesh (Grid)
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;GL/glut.h&gt;
+
+#define maxx 20  // Number of columns
+#define maxy 30  // Number of rows
+#define dx 10    // Horizontal spacing
+#define dy 15    // Vertical spacing
+
+GLfloat x[maxx] = {0.0}, y[maxy] = {0.0};  // Arrays to store coordinates
+GLfloat x0 = 50, y0 = 50;  // Starting position
+GLint i, j;
+
+// Initialize OpenGL settings
+void init() {
+    glClearColor(1, 1, 1, 1);  // White background
+    glClear(GL_COLOR_BUFFER_BIT);
+    glPointSize(5);
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(0, 499, 0, 499);  // Set 2D view area
+}
+
+// Draw the mesh
+void display(void) {
+    // Calculate x coordinates
+    for(i = 0; i &lt; maxx; i++)
+        x[i] = x0 + i * dx;
+    
+    // Calculate y coordinates
+    for(j = 0; j &lt; maxy; j++)
+        y[j] = y0 + j * dy;
+    
+    // Draw rectangles using nested loops
+    for(i = 0; i &lt; maxx-1; i++)
+        for(j = 0; j &lt; maxy-1; j++) {
+            glColor3f(0, 0, 1);  // Blue color
+            glBegin(GL_LINE_LOOP);  // Start drawing rectangle
+                glVertex2f(x[i], y[j]);        // Bottom-left
+                glVertex2f(x[i], y[j+1]);      // Top-left
+                glVertex2f(x[i+1], y[j+1]);    // Top-right
+                glVertex2f(x[i+1], y[j]);      // Bottom-right
+            glEnd();
+        }
+    glFlush();  // Force execution of GL commands
+}
+
+int main(int argc, char *argv[]) {
+    glutInit(&amp;argc, argv);
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Rectangular Mesh");
+    glutInitWindowPosition(0, 0);
+    glutDisplayFunc(display);  // Register display callback
+    init();
+    glutMainLoop();  // Enter event loop
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Program 2: Midpoint Line Drawing -->
+            <div class="program-card">
+                <div class="program-title">
+                    <span class="program-number">2</span>
+                    <span>Midpoint Line Drawing Algorithm</span>
+                </div>
+                
+                <div class="description">
+                    <h3>📋 What it does:</h3>
+                    <ul>
+                        <li>Draws a line using Bresenham's midpoint algorithm</li>
+                        <li>Efficient - uses only integer arithmetic</li>
+                        <li>Takes start and end points as input</li>
+                    </ul>
+                </div>
+
+                <div class="key-concepts">
+                    <h3>💡 Key Concepts:</h3>
+                    <p>Decision parameter (d), Incremental algorithm, Pixel plotting</p>
+                </div>
+
+                <div class="output-demo">
+                    <span class="demo-badge">📺 Output Preview</span>
+                    <h3>What you'll see:</h3>
+                    <div class="output-visual">
+                        <svg width="300" height="200" viewBox="0 0 300 200">
+                            <rect width="300" height="200" fill="#ffffff"/>
+                            <line x1="50" y1="150" x2="250" y2="50" stroke="#000000" stroke-width="3"/>
+                            <circle cx="50" cy="150" r="4" fill="#ff0000"/>
+                            <circle cx="250" cy="50" r="4" fill="#ff0000"/>
+                        </svg>
+                    </div>
+                    <p class="output-desc">
+                        <strong>Expected Output:</strong> A white window with a black line drawn from your start point to end point.
+                        <br><strong>Example Input:</strong> x0=100, y0=100, x1=400, y1=300
+                        <br>The line is drawn pixel by pixel using Bresenham's algorithm - very smooth and efficient!
+                    </p>
+                </div>
+
+                <div style="position: relative;">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    <pre><code>// Program 2: Midpoint Line Drawing Algorithm
+#include &lt;stdio.h&gt;
+#include &lt;GL/glut.h&gt;
+#include &lt;stdlib.h&gt;
+
+int x00, x01, y00, y01;  // Line endpoints
+
+// Initialize OpenGL
+void init() {
+    glClearColor(1, 1, 1, 1);  // White background
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(-500, 500, -500, 500);  // Set coordinate system
+}
+
+// Plot a single pixel
+void writepixel(int x, int y) {
+    glPointSize(5);
+    glBegin(GL_POINTS);
+        glColor3f(0, 0, 0);  // Black color
+        glVertex2f(x, y);
+    glEnd();
+    glFlush();
+}
+
+// Draw line using midpoint algorithm
+void display() {
+    int dx = x01 - x00;  // Change in x
+    int dy = y01 - y00;  // Change in y
+    int d = 2*dy - dx;   // Initial decision parameter
+    int incrE = dy;      // Increment if d &lt; 0
+    int incrNE = dy - dx;  // Increment if d &gt;= 0
+    int x = x00, y = y00;
+    
+    writepixel(x, y);  // Plot first point
+    
+    // Loop until we reach end point
+    while(x &lt; x01) {
+        if(d &lt; 0) {  // Choose E (East)
+            d = d + 2*incrE;
+            x++;
+        } else {  // Choose NE (North-East)
+            d = d + 2*incrNE;
+            y++;
+            x++;
+        }
+        writepixel(x, y);  // Plot next point
+    }
+}
+
+int main(int argc, char *argv[]) {
+    // Get user input
+    printf("Enter the values \n");
+    printf("x0=");
+    scanf("%d", &amp;x00);
+    printf("y0=");
+    scanf("%d", &amp;y00);
+    printf("x1=");
+    scanf("%d", &amp;x01);
+    printf("y1=");
+    scanf("%d", &amp;y01);
+    
+    glutInit(&amp;argc, argv);
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Midpoint Line");
+    glutInitWindowPosition(0, 0);
+    glutDisplayFunc(display);
+    init();
+    glutMainLoop();
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Program 3: House Rotation -->
+            <div class="program-card">
+                <div class="program-title">
+                    <span class="program-number">3</span>
+                    <span>2D Rotation - House Example</span>
+                </div>
+                
+                <div class="description">
+                    <h3>📋 What it does:</h3>
+                    <ul>
+                        <li>Draws a house shape (base + roof + door)</li>
+                        <li>Rotates the house by user-specified angle</li>
+                        <li>Shows original (black) and rotated (red) versions</li>
+                    </ul>
+                </div>
+
+                <div class="key-concepts">
+                    <h3>💡 Key Concepts:</h3>
+                    <p>2D Transformation, Rotation Matrix, glRotatef(), glTranslatef()</p>
+                </div>
+
+                <div class="output-demo">
+                    <span class="demo-badge">📺 Output Preview</span>
+                    <h3>What you'll see:</h3>
+                    <div class="output-visual">
+                        <svg width="300" height="200" viewBox="0 0 300 200">
+                            <rect width="300" height="200" fill="#ffffff"/>
+                            <!-- Original house in black -->
+                            <g stroke="#000000" fill="none" stroke-width="2">
+                                <rect x="80" y="120" width="60" height="60"/>
+                                <polygon points="80,120 110,90 140,120"/>
+                                <rect x="95" y="150" width="15" height="30"/>
+                            </g>
+                            <!-- Rotated house in red -->
+                            <g stroke="#ff0000" fill="none" stroke-width="2" transform="rotate(30 110 150)">
+                                <rect x="80" y="120" width="60" height="60"/>
+                                <polygon points="80,120 110,90 140,120"/>
+                                <rect x="95" y="150" width="15" height="30"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <p class="output-desc">
+                        <strong>Expected Output:</strong> Two houses displayed - original in BLACK and rotated version in RED.
+                        <br><strong>Example Input:</strong> Enter rotation angle = 45 degrees
+                        <br>The red house will be rotated around the bottom-left corner by your specified angle.
+                    </p>
+                </div>
+
+                <div style="position: relative;">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    <pre><code>// Program 3: 2D House Rotation
+#include &lt;stdio.h&gt;
+#include &lt;GL/glut.h&gt;
+
+GLfloat theta = 0.0f;  // Rotation angle
+
+// Draw a simple house
+void drawHouse() {
+    // Draw house base (rectangle)
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(100.0f, 100.0f);  // Bottom-left
+        glVertex2f(250.0f, 100.0f);  // Bottom-right
+        glVertex2f(250.0f, 300.0f);  // Top-right
+        glVertex2f(100.0f, 300.0f);  // Top-left
+    glEnd();
+
+    // Draw roof (triangle)
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(100.0f, 300.0f);   // Left base
+        glVertex2f(175.0f, 400.0f);   // Apex
+        glVertex2f(250.0f, 300.0f);   // Right base
+    glEnd();
+
+    // Draw door (rectangle)
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(150.0f, 100.0f);  // Bottom-left
+        glVertex2f(150.0f, 150.0f);  // Top-left
+        glVertex2f(200.0f, 150.0f);  // Top-right
+        glVertex2f(200.0f, 100.0f);  // Bottom-right
+    glEnd();
+}
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    // Draw original house in black
+    glColor3f(0.0f, 0.0f, 0.0f);
+    drawHouse();
+
+    // Draw rotated house in red
+    glPushMatrix();  // Save current state
+        glTranslatef(100.0f, 100.0f, 0.0f);   // Move to pivot point
+        glRotatef(theta, 0.0f, 0.0f, 1.0f);   // Rotate around Z-axis
+        glTranslatef(-100.0f, -100.0f, 0.0f); // Move back
+        
+        glColor3f(1.0f, 0.0f, 0.0f);  // Red color
+        drawHouse();
+    glPopMatrix();  // Restore state
+
+    glFlush();
+}
+
+void init() {
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);  // White background
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(0.0, 500.0, 0.0, 500.0);
+}
+
+int main(int argc, char* argv[]) {
+    printf("Enter rotation angle (degrees): ");
+    scanf("%f", &amp;theta);
+    
+    glutInit(&amp;argc, argv);
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Rotated House");
+    init();
+    glutDisplayFunc(display);
+    glutMainLoop();
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Program 4: Polygon Filling -->
+            <div class="program-card">
+                <div class="program-title">
+                    <span class="program-number">4</span>
+                    <span>Scan-Line Polygon Filling</span>
+                </div>
+                
+                <div class="description">
+                    <h3>📋 What it does:</h3>
+                    <ul>
+                        <li>Fills a polygon using scan-line algorithm</li>
+                        <li>Takes 4 vertices as input (quadrilateral)</li>
+                        <li>Finds left and right edges for each scan line</li>
+                    </ul>
+                </div>
+
+                <div class="key-concepts">
+                    <h3>💡 Key Concepts:</h3>
+                    <p>Scan-line algorithm, Edge detection, Slope inverse, Fill between edges</p>
+                </div>
+
+                <div class="output-demo">
+                    <span class="demo-badge">📺 Output Preview</span>
+                    <h3>What you'll see:</h3>
+                    <div class="output-visual">
+                        <svg width="300" height="200" viewBox="0 0 300 200">
+                            <rect width="300" height="200" fill="#ffffff"/>
+                            <polygon points="100,150 150,50 250,80 200,170" fill="#0066cc" stroke="#0000ff" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p class="output-desc">
+                        <strong>Expected Output:</strong> A filled polygon (quadrilateral) with blue color.
+                        <br><strong>Example Input:</strong> Enter 4 vertices like (100,100), (200,100), (220,200), (80,200)
+                        <br>The polygon outline is drawn first, then filled using scan-line algorithm - you'll see it fill line by line!
+                    </p>
+                </div>
+
+                <div style="position: relative;">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    <pre><code>// Program 4: Scan-Line Polygon Filling
+#include &lt;GL/glut.h&gt;
+#include &lt;stdio.h&gt;
+
+int X0, Y0, X1, Y1, X2, Y2, X3, Y3;  // 4 vertices of polygon
+
+void init() {
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Scan-Line Polygon Filling Algorithm");
+    glClearColor(1, 1, 1, 1);  // White background
+    glClear(GL_COLOR_BUFFER_BIT);
+    gluOrtho2D(0, 500, 0, 500);
+    glColor3f(0, 0, 1);  // Blue color
+    glPointSize(1);
+}
+
+// Detect edges and store left/right boundaries
+void edgeDetect(int x1, int y1, int x2, int y2, int LE[], int RE[]) {
+    double slopeInverse, x;  // 1/m (inverse slope)
+    int i, temp;
+    
+    // Ensure y1 &lt; y2 (swap if needed)
+    if(y2 &lt; y1) {
+        temp = y1; y1 = y2; y2 = temp;
+        temp = x1; x1 = x2; x2 = temp;
+    }
+    
+    // Calculate inverse slope (dx/dy)
+    if(y1 != y2)
+        slopeInverse = (x2 - x1) / (double)(y2 - y1);
+    else
+        slopeInverse = x2 - x1;
+    
+    x = x1;
+    // For each scan line, update left and right edges
+    for(i = y1; i &lt;= y2; i++) {
+        if(x &lt; LE[i])  LE[i] = x;  // Update left edge
+        if(x &gt; RE[i])  RE[i] = x;  // Update right edge
+        x += slopeInverse;  // Move to next scan line
+    }
+}
+
+// Draw a single pixel
+void drawPixel(int x, int y) {
+    glBegin(GL_POINTS);
+        glVertex2f(x, y);
+    glEnd();
+}
+
+// Fill polygon using scan-line algorithm
+void scanLineFill() {
+    int i, j, LE[500], RE[500];
+    
+    // Initialize left and right edge arrays
+    for(i = 0; i &lt; 500; i++) {
+        LE[i] = 500;  // Left edge starts at right
+        RE[i] = 0;    // Right edge starts at left
+    }
+    
+    // Process all 4 edges of polygon
+    edgeDetect(X0, Y0, X1, Y1, LE, RE);
+    edgeDetect(X1, Y1, X2, Y2, LE, RE);
+    edgeDetect(X2, Y2, X3, Y3, LE, RE);
+    edgeDetect(X3, Y3, X0, Y0, LE, RE);
+    
+    // Fill between left and right edges
+    for(i = 0; i &lt; 500; i++)
+        if(LE[i] &lt;= RE[i])
+            for(j = LE[i]; j &lt;= RE[i]; j++) {
+                drawPixel(j, i);
+                glFlush();
+            }
+}
+
+void display() {
+    // Draw polygon outline
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(X0, Y0);
+        glVertex2f(X1, Y1);
+        glVertex2f(X2, Y2);
+        glVertex2f(X3, Y3);
+    glEnd();
+    glFlush();
+    scanLineFill();  // Fill the polygon
+}
+
+int main(int argc, char *argv[]) {
+    printf("Enter co-ordinates of polygon vertices (0 &lt;= input &lt; 500) :\n");
+    printf("X0="); scanf("%d", &amp;X0);
+    printf("Y0="); scanf("%d", &amp;Y0);
+    printf("X1="); scanf("%d", &amp;X1);
+    printf("Y1="); scanf("%d", &amp;Y1);
+    printf("X2="); scanf("%d", &amp;X2);
+    printf("Y2="); scanf("%d", &amp;Y2);
+    printf("X3="); scanf("%d", &amp;X3);
+    printf("Y3="); scanf("%d", &amp;Y3);
+    
+    glutInit(&amp;argc, argv);
+    init();
+    glutDisplayFunc(display);
+    glutMainLoop();
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Program 5: Mouse and Keyboard -->
+            <div class="program-card">
+                <div class="program-title">
+                    <span class="program-number">5</span>
+                    <span>Mouse & Keyboard Interaction</span>
+                </div>
+                
+                <div class="description">
+                    <h3>📋 What it does:</h3>
+                    <ul>
+                        <li>Left Click → Draw Point</li>
+                        <li>Right Click → Draw Line</li>
+                        <li>Press 'T' → Draw Triangle</li>
+                        <li>Press 'S' → Draw Square</li>
+                        <li>Press 'P' → Draw Pentagon</li>
+                    </ul>
+                </div>
+
+                <div class="key-concepts">
+                    <h3>💡 Key Concepts:</h3>
+                    <p>Event handling, glutMouseFunc(), glutKeyboardFunc(), Interactive graphics</p>
+                </div>
+
+                <div class="output-demo">
+                    <span class="demo-badge">📺 Output Preview</span>
+                    <h3>What you'll see:</h3>
+                    <div class="output-visual">
+                        <svg width="300" height="200" viewBox="0 0 300 200">
+                            <rect width="300" height="200" fill="#ffffff"/>
+                            <!-- Point (red) -->
+                            <circle cx="50" cy="50" r="8" fill="#ff0000"/>
+                            <!-- Line (blue) -->
+                            <line x1="100" y1="80" x2="150" y2="80" stroke="#0000ff" stroke-width="8"/>
+                            <!-- Triangle (magenta) -->
+                            <polygon points="200,60 190,80 210,80" fill="#ff00ff"/>
+                            <!-- Square (cyan) -->
+                            <rect x="80" y="120" width="30" height="30" fill="#00ffff"/>
+                            <!-- Pentagon (yellow) -->
+                            <polygon points="180,140 170,150 170,170 190,170 190,150" fill="#ffff00"/>
+                        </svg>
+                    </div>
+                    <p class="output-desc">
+                        <strong>Expected Output:</strong> Interactive drawing canvas!
+                        <br>🖱️ <strong>Left Click:</strong> Red points | <strong>Right Click:</strong> Blue lines
+                        <br>⌨️ <strong>Press T:</strong> Magenta triangle | <strong>Press S:</strong> Cyan square | <strong>Press P:</strong> Yellow pentagon
+                        <br>Draw anywhere on the window - shapes appear where you click/press keys!
+                    </p>
+                </div>
+
+                <div style="position: relative;">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    <pre><code>// Program 5: Mouse and Keyboard Interaction
+#include &lt;GL/glut.h&gt;
+#include &lt;stdio.h&gt;
+
+void init() {
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Mouse and Keyboard Operations");
+    glClearColor(1, 1, 1, 1);  // White background
+    glClear(GL_COLOR_BUFFER_BIT);
+    gluOrtho2D(0, 500, 500, 0);  // Note: Y-axis is inverted
+}
+
+// Draw a point at (x, y)
+void drawPoint(int x, int y) {
+    glColor3f(1, 0, 0);  // Red
+    glPointSize(10);
+    glBegin(GL_POINTS);
+        glVertex2f(x, y);
+    glEnd();
+    glFlush();
+}
+
+// Draw a horizontal line at (x, y)
+void drawLine(int x, int y) {
+    glColor3f(0, 0, 1);  // Blue
+    glLineWidth(10);
+    glBegin(GL_LINES);
+        glVertex2f(x - 25, y);  // Start point
+        glVertex2f(x + 25, y);  // End point
+    glEnd();
+    glFlush();
+}
+
+// Draw triangle centered at (x, y)
+void drawTriangle(int x, int y) {
+    glColor3f(1, 0, 1);  // Magenta
+    glBegin(GL_TRIANGLES);
+        glVertex2f(x, y - 10);        // Top vertex
+        glVertex2f(x - 10, y + 10);   // Bottom-left
+        glVertex2f(x + 10, y + 10);   // Bottom-right
+    glEnd();
+    glFlush();
+}
+
+// Draw square centered at (x, y)
+void drawSquare(int x, int y) {
+    glColor3f(0, 1, 1);  // Cyan
+    glBegin(GL_POLYGON);
+        glVertex2f(x - 10, y - 10);  // Bottom-left
+        glVertex2f(x - 10, y + 10);  // Top-left
+        glVertex2f(x + 10, y + 10);  // Top-right
+        glVertex2f(x + 10, y - 10);  // Bottom-right
+    glEnd();
+    glFlush();
+}
+
+// Draw pentagon centered at (x, y)
+void drawPentagon(int x, int y) {
+    glColor3f(1, 1, 0);  // Yellow
+    glBegin(GL_POLYGON);
+        glVertex2f(x, y - 15);
+        glVertex2f(x - 10, y - 5);
+        glVertex2f(x - 10, y + 10);
+        glVertex2f(x + 10, y + 10);
+        glVertex2f(x + 10, y - 5);
+    glEnd();
+    glFlush();
+}
+
+// Mouse event handler
+void mouse(int button, int state, int x, int y) {
+    if (button == GLUT_LEFT_BUTTON &amp;&amp; state == GLUT_DOWN)
+        drawPoint(x, y);
+    if (button == GLUT_RIGHT_BUTTON &amp;&amp; state == GLUT_DOWN)
+        drawLine(x, y);
+}
+
+// Keyboard event handler
+void keyboard(unsigned char key, int x, int y) {
+    if (key == 't' || key == 'T')
+        drawTriangle(x, y);
+    if (key == 's' || key == 'S')
+        drawSquare(x, y);
+    if (key == 'p' || key == 'P')
+        drawPentagon(x, y);
+}
+
+void display() {
+    glFlush();
+}
+
+int main(int argc, char *argv[]) {
+    printf("Mouse Functions :\n\tLEFT CLICK - Point\n\tRIGHT CLICK - Line\n");
+    printf("Keyboard Functions :\n\tT or t - Triangle\n\tS or s - Square\n\tP or p - Pentagon\n");
+    
+    glutInit(&amp;argc, argv);
+    init();
+    glutDisplayFunc(display);
+    glutMouseFunc(mouse);      // Register mouse handler
+    glutKeyboardFunc(keyboard);  // Register keyboard handler
+    glutMainLoop();
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Program 6: Circle Drawing -->
+            <div class="program-card">
+                <div class="program-title">
+                    <span class="program-number">6</span>
+                    <span>Midpoint Circle Drawing Algorithm</span>
+                </div>
+                
+                <div class="description">
+                    <h3>📋 What it does:</h3>
+                    <ul>
+                        <li>Draws a circle using midpoint algorithm</li>
+                        <li>Uses 8-way symmetry (draws 8 points at once)</li>
+                        <li>Only integer arithmetic - very efficient!</li>
+                    </ul>
+                </div>
+
+                <div class="key-concepts">
+                    <h3>💡 Key Concepts:</h3>
+                    <p>Circle symmetry, Decision parameter, Plotting 8 symmetric points</p>
+                </div>
+
+                <div class="output-demo">
+                    <span class="demo-badge">📺 Output Preview</span>
+                    <h3>What you'll see:</h3>
+                    <div class="output-visual">
+                        <svg width="300" height="200" viewBox="0 0 300 200">
+                            <rect width="300" height="200" fill="#000000"/>
+                            <circle cx="150" cy="100" r="70" stroke="#ff0000" stroke-width="3" fill="none"/>
+                        </svg>
+                    </div>
+                    <p class="output-desc">
+                        <strong>Expected Output:</strong> A perfect RED circle on BLACK background.
+                        <br><strong>Example Input:</strong> Enter radius = 100
+                        <br>The circle is drawn using 8-way symmetry - very efficient! Only 1/8 of the circle is calculated, 
+                        the rest is mirrored. Larger radius = bigger circle!
+                    </p>
+                </div>
+
+                <div style="position: relative;">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    <pre><code>// Program 6: Midpoint Circle Drawing
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;GL/glut.h&gt;
+
+int r;  // Radius of circle
+
+void init() {
+    glClearColor(0, 0, 0, 0);  // Black background
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(-900, 900, -900, 900);
+}
+
+// Plot a single pixel
+void writepixel(int x, int y) {
+    glPointSize(5);
+    glBegin(GL_POINTS);
+        glColor3f(1, 0, 0);  // Red color
+        glVertex2f(x, y);
+    glEnd();
+    glFlush();
+}
+
+// Draw circle using midpoint algorithm
+void midpointcircle() {
+    int x = 0, y = r;
+    double d = 5.0/4.0 - r;  // Initial decision parameter
+    
+    while(y &gt; x) {
+        // Update decision parameter
+        if(d &lt; 0)
+            d += 2*x + 3.0;  // Choose E (East)
+        else {
+            d += 2*(x - y) + 5.0;  // Choose SE (South-East)
+            y--;
+        }
+        x++;
+        
+        // Plot 8 symmetric points (circle symmetry)
+        writepixel(x, y);      // Octant 1
+        writepixel(y, x);      // Octant 2
+        writepixel(-x, y);     // Octant 3
+        writepixel(y, -x);     // Octant 4
+        writepixel(-x, -y);    // Octant 5
+        writepixel(-y, -x);    // Octant 6
+        writepixel(x, -y);     // Octant 7
+        writepixel(-y, x);     // Octant 8
+    }
+}
+
+int main(int argc, char* argv[]) {
+    printf("Enter radius: ");
+    scanf("%d", &amp;r);
+    
+    glutInit(&amp;argc, argv);
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Circle");
+    init();
+    glutDisplayFunc(midpointcircle);
+    glutMainLoop();
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Program 7: Sierpinski Gasket -->
+            <div class="program-card">
+                <div class="program-title">
+                    <span class="program-number">7</span>
+                    <span>Sierpinski Gasket (Fractal Triangle)</span>
+                </div>
+                
+                <div class="description">
+                    <h3>📋 What it does:</h3>
+                    <ul>
+                        <li>Creates a fractal pattern using recursion</li>
+                        <li>Divides triangle into 3 smaller triangles</li>
+                        <li>Repeats the process n times</li>
+                        <li>Higher n = more detailed pattern</li>
+                    </ul>
+                </div>
+
+                <div class="key-concepts">
+                    <h3>💡 Key Concepts:</h3>
+                    <p>Recursion, Fractals, Midpoint calculation, Divide and conquer</p>
+                </div>
+
+                <div class="output-demo">
+                    <span class="demo-badge">📺 Output Preview</span>
+                    <h3>What you'll see:</h3>
+                    <div class="output-visual">
+                        <svg width="300" height="200" viewBox="0 0 300 200">
+                            <rect width="300" height="200" fill="#ffffff"/>
+                            <!-- Sierpinski pattern simplified -->
+                            <polygon points="150,30 50,170 250,170" fill="none" stroke="#000000" stroke-width="1.5"/>
+                            <polygon points="150,100 100,170 200,170" fill="none" stroke="#000000" stroke-width="1.5"/>
+                            <polygon points="100,170 75,135 125,135" fill="none" stroke="#000000" stroke-width="1"/>
+                            <polygon points="200,170 175,135 225,135" fill="none" stroke="#000000" stroke-width="1"/>
+                            <polygon points="150,100 137,122 163,122" fill="none" stroke="#000000" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <p class="output-desc">
+                        <strong>Expected Output:</strong> A beautiful fractal triangle pattern (Sierpinski Gasket).
+                        <br><strong>Example Input:</strong> n = 3 (try values 0-5)
+                        <br>Higher n = more subdivisions = more detailed fractal pattern!
+                        <br>• n=0: Simple triangle | n=3: Complex pattern | n=5: Very detailed (but slow)
+                    </p>
+                </div>
+
+                <div style="position: relative;">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy Code</button>
+                    <pre><code>// Program 7: Sierpinski Gasket (Recursive Fractal)
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;GL/glut.h&gt;
+
+int n;  // Number of recursive subdivisions
+
+void init() {
+    glClearColor(1, 1, 1, 1);  // White background
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(0, 10, 0, 10);
+}
+
+// Draw a single triangle
+void triangle(float *a, float *b, float *c) {
+    glVertex2f(a[0], a[1]);  // Vertex A
+    glVertex2f(b[0], b[1]);  // Vertex B
+    glVertex2f(c[0], c[1]);  // Vertex C
+}
+
+// Recursive function to subdivide triangle
+void draw_triangle(float *a, float *b, float *c, int k) {
+    float ab[2], ac[2], bc[2];  // Midpoints
+    
+    if(k &gt; 0) {  // If more subdivisions needed
+        // Calculate midpoint of AB
+        for(int i = 0; i &lt; 2; i++)
+            ab[i] = (a[i] + b[i]) / 2;
+        
+        // Calculate midpoint of AC
+        for(int i = 0; i &lt; 2; i++)
+            ac[i] = (a[i] + c[i]) / 2;
+        
+        // Calculate midpoint of BC
+        for(int i = 0; i &lt; 2; i++)
+            bc[i] = (c[i] + b[i]) / 2;
+
+        // Recursively draw 3 smaller triangles
+        draw_triangle(a, ab, ac, k-1);   // Top triangle
+        draw_triangle(b, bc, ab, k-1);   // Bottom-left
+        draw_triangle(c, bc, ac, k-1);   // Bottom-right
+    } else {
+        triangle(a, b, c);  // Base case: draw the triangle
+    }
+}
+
+void display() {
+    float a[2] = {1, 1};      // Bottom-left vertex
+    float b[2] = {6, 1};      // Bottom-right vertex
+    float c[2] = {3.5, 5};    // Top vertex
+
+    glBegin(GL_TRIANGLES);
+        glColor3f(0, 0, 0);  // Black color
+        draw_triangle(a, b, c, n);
+    glEnd();
+    glFlush();
+}
+
+int main(int argc, char* argv[]) {
+    printf("Enter number of subdivisions (0-5 recommended): ");
+    scanf("%d", &amp;n);
+    
+    glutInit(&amp;argc, argv);
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Sierpinski Gasket");
+    init();
+    glutDisplayFunc(display);
+    glutMainLoop();
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>📚 Computer Graphics Lab Programs | Study Reference with Easy Comments</p>
+            <p>💡 Tip: Use Ctrl+F to search for specific topics or functions</p>
+        </footer>
+    </div>
+
+    <script>
+        // Copy code to clipboard
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling.querySelector('code');
+            const code = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '✓ Copied!';
+                button.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#667eea';
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy code');
+            });
+        }
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
